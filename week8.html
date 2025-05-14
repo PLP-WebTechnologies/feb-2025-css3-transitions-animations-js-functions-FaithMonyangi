@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dynamic and Interactive Webpage</title>
+  <style>
+    /* Basic Reset */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* Center the content */
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      text-align: center;
+    }
+
+    .container {
+      background-color: #fff;
+      padding: 40px;
+      border-radius: 8px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+      width: 300px;
+    }
+
+    /* CSS for the button and animation */
+    @keyframes slideIn {
+      0% {
+        transform: translateX(-100%);
+        opacity: 0;
+      }
+      100% {
+        transform: translateX(0);
+        opacity: 1;
+      }
+    }
+
+    .button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+      font-size: 16px;
+      border-radius: 4px;
+      transition: background-color 0.3s;
+      margin-top: 20px;
+      display: inline-block;
+    }
+
+    .button:hover {
+      background-color: #2980b9;
+    }
+
+    /* Apply the animation */
+    .animated-button {
+      animation: slideIn 2s ease-out forwards;
+    }
+
+    /* Styling the welcome message */
+    #welcome-message {
+      margin-top: 20px;
+      font-size: 20px;
+      color: #2c3e50;
+    }
+
+    /* Input field styling */
+    input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin-top: 10px;
+      border: 2px solid #ddd;
+      border-radius: 4px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="container">
+    <h1>Welcome to My Interactive Webpage</h1>
+
+    <!-- Input field to enter name -->
+    <input type="text" id="name" placeholder="Enter your name" />
+
+    <!-- Button to save name to localStorage -->
+    <button class="button" onclick="storeData()">Save Name</button>
+
+    <!-- Display the welcome message -->
+    <div id="welcome-message"></div>
+
+    <!-- Button to trigger animation -->
+    <button id="animateButton" class="button">Click to Animate</button>
+
+    <!-- Element to animate -->
+    <div id="animatedButton" class="button">I will animate!</div>
+  </div>
+
+  <script>
+    // Store data in localStorage when the "Save Name" button is clicked
+    function storeData() {
+      const userName = document.getElementById('name').value;
+      if (userName) {
+        localStorage.setItem('userName', userName);
+        loadData(); // Refresh the welcome message after storing the name
+      } else {
+        alert("Please enter your name.");
+      }
+    }
+
+    // Retrieve data from localStorage and display it
+    function loadData() {
+      const storedName = localStorage.getItem('userName');
+      if (storedName) {
+        document.getElementById('welcome-message').innerText = `Welcome back, ${storedName}!`;
+      }
+    }
+
+    // Trigger the animation when the "Click to Animate" button is clicked
+    document.getElementById('animateButton').addEventListener('click', function() {
+      const button = document.getElementById('animatedButton');
+      button.classList.add('animated-button'); // Add the animation class
+    });
+
+    // Call loadData() when the page loads to display the welcome message if the name is already stored
+    window.onload = loadData;
+  </script>
+
+</body>
+</html>
