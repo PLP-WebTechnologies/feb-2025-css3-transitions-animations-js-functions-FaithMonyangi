@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CSS Animation & JavaScript Example</title>
+  
+  <style>
+    /* General body styling */
+    body {
+      font-family: Arial, sans-serif;
+      transition: background-color 0.3s ease; /* Smooth transition for background color change */
+      margin: 0;
+      padding: 0;
+    }
+
+    /* Dark mode styles */
+    body.dark-mode {
+      background-color: #2c3e50;
+      color: white;
+    }
+
+    /* Profile card initial style */
+    #profile {
+      width: 300px;
+      padding: 20px;
+      background: lightblue;
+      border-radius: 8px;
+      opacity: 0;
+      transform: translateX(-100%); /* Position off the screen to the left */
+      transition: opacity 0.5s ease, transform 0.5s ease; /* Smooth transition when profile appears */
+    }
+
+    /* Show profile animation */
+    .show-profile {
+      opacity: 1; 
+      transform: translateX(0); /* Bring the profile into view */
+    }
+
+    /* Basic button styling */
+    button {
+      padding: 10px 20px;
+      margin: 10px;
+      cursor: pointer;
+      background-color: #3498db;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+    }
+
+    button:hover {
+      background-color: #2980b9;
+    }
+  </style>
+  
+</head>
+<body>
+
+  <!-- Toggle dark mode button -->
+  <button id="themeToggle">Toggle Dark Mode</button>
+  
+  <!-- User profile card -->
+  <div id="profile" class="profile-card">
+    <h2>User Profile</h2>
+    <p>This is a sample user profile with animations.</p>
+  </div>
+
+  <!-- Button to show profile -->
+  <button id="showProfileBtn">Show Profile</button>
+
+  <script>
+    // Check if dark mode preference exists in localStorage and apply it
+    if (localStorage.getItem('darkMode') === 'true') {
+      document.body.classList.add('dark-mode');
+    }
+
+    // Toggle Dark Mode functionality
+    document.getElementById('themeToggle').addEventListener('click', function() {
+      // Toggle the dark mode class on body
+      document.body.classList.toggle('dark-mode');
+      // Save the dark mode preference in localStorage
+      localStorage.setItem('darkMode', document.body.classList.contains('dark-mode'));
+    });
+
+    // Show profile card with animation when button is clicked
+    document.getElementById('showProfileBtn').addEventListener('click', function() {
+      document.getElementById('profile').classList.add('show-profile');
+    });
+  </script>
+
+</body>
+</html>
